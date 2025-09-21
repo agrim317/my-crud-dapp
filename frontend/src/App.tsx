@@ -3,6 +3,7 @@ import { Layout } from './components/Layout';
 import { HomePage } from './pages/Home';
 import { SecureCrudPage } from './pages/SecureCrud';
 import { SC04_LackOfInputValidationPage } from './pages/SC04_LackOfInputValidation';
+import { SC08_IntegerOverflowAndUnderflowPage } from './pages/SC08_IntegerOverflowAndUnderflow';
 import { useAccount } from 'wagmi';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <>
             <Route path="secure-crud" element={<SecureCrudPage />} />
             <Route path="sc04-lack-of-input-validation" element={<SC04_LackOfInputValidationPage />} />
+            <Route path="sc08-integer-overflow-and-underflow" element={<SC08_IntegerOverflowAndUnderflowPage />} />
           </>
         )}
       </Route>
