@@ -37,7 +37,8 @@ export function Layout() {
         <Link to="/" style={{ marginRight: '1rem' }}>Home</Link>
         <Link to="/secure-crud" style={{ marginRight: '1rem' }}>Secure CRUD</Link>
         <Link to="/sc04-lack-of-input-validation" style={{ marginRight: '1rem' }}>Lack of Input Validation</Link>
-        <Link to="/sc08-integer-overflow-and-underflow">Integer Overflow and Underflow</Link>
+        <Link to="/sc08-integer-overflow-and-underflow" style={{ marginRight: '1rem' }}>Integer Overflow and Underflow</Link>
+        <Link to="/sc01-improper-access-control">Improper Access Control</Link>
       </nav>
       <main style={{ padding: '1rem' }}>
         <Outlet />

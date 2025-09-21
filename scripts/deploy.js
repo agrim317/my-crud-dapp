@@ -30,6 +30,18 @@ async function main() {
   const sc08_fixed = await SC08_Fixed.deploy();
   await sc08_fixed.waitForDeployment();
   console.log(`🟢 SC08_IntegerOverflowAndUnderflow_Fixed contract deployed to: ${sc08_fixed.target}`);
+
+  // Deploy the SC01_ImproperAccessControl_Vulnerable contract
+  const SC01_Vulnerable = await ethers.getContractFactory("SC01_ImproperAccessControl_Vulnerable");
+  const sc01_vulnerable = await SC01_Vulnerable.deploy({ value: ethers.parseEther("1") });
+  await sc01_vulnerable.waitForDeployment();
+  console.log(`🔴 SC01_ImproperAccessControl_Vulnerable contract deployed to: ${sc01_vulnerable.target}`);
+
+  // Deploy the SC01_ImproperAccessControl_Fixed contract
+  const SC01_Fixed = await ethers.getContractFactory("SC01_ImproperAccessControl_Fixed");
+  const sc01_fixed = await SC01_Fixed.deploy({ value: ethers.parseEther("1") });
+  await sc01_fixed.waitForDeployment();
+  console.log(`🟢 SC01_ImproperAccessControl_Fixed contract deployed to: ${sc01_fixed.target}`);
 }
 
 main().catch((error) => {
