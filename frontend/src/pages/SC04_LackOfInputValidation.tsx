@@ -5,65 +5,65 @@ import { config } from '../main';
 
 // ABIs for the contracts
 const vulnerableSC04ABI = [
-  {
-    "inputs": [
-      { "internalType": "address", "name": "user", "type": "address" },
-      { "internalType": "uint256", "name": "amount", "type": "uint256" }
-    ],
-    "name": "setBalance",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "", "type": "address" }
-    ],
-    "name": "balances",
-    "outputs": [
-      { "internalType": "uint256", "name": "", "type": "uint256" }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  }
+  {
+    "inputs": [
+      { "internalType": "address", "name": "user", "type": "address" },
+      { "internalType": "uint256", "name": "amount", "type": "uint256" }
+    ],
+    "name": "setBalance",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "", "type": "address" }
+    ],
+    "name": "balances",
+    "outputs": [
+      { "internalType": "uint256", "name": "", "type": "uint256" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
 ];
 
 const fixedSC04ABI = [
-  {
-    "inputs": [],
-    "stateMutability": "nonpayable",
-    "type": "constructor"
-  },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "", "type": "address" }
-    ],
-    "name": "balances",
-    "outputs": [
-      { "internalType": "uint256", "name": "", "type": "uint256" }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "owner",
-    "outputs": [
-      { "internalType": "address", "name": "", "type": "address" }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "user", "type": "address" },
-      { "internalType": "uint256", "name": "amount", "type": "uint256" }
-    ],
-    "name": "setBalance",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  }
+  {
+    "inputs": [],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "", "type": "address" }
+    ],
+    "name": "balances",
+    "outputs": [
+      { "internalType": "uint256", "name": "", "type": "uint256" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
+      { "internalType": "address", "name": "", "type": "address" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "user", "type": "address" },
+      { "internalType": "uint256", "name": "amount", "type": "uint256" }
+    ],
+    "name": "setBalance",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
 ];
 
 // Deployed contract addresses
@@ -146,52 +146,127 @@ export function SC04_LackOfInputValidationPage() {
   };
 
   return (
-    <section>
-      <h2>SC04:2025 - Lack of Input Validation</h2>
-      <p>Input validation ensures that a smart contract processes only valid and expected data. When contracts fail to validate incoming inputs, they inadvertently expose themselves to security risks such as logic manipulation, unauthorized access, and unexpected behavior.</p>
+    <section className="p-8 space-y-8">
+      <h2 className="text-3xl font-bold text-gray-100">SC04:2025 - Lack of Input Validation</h2>
+      <p className="text-lg text-gray-400">
+        Input validation ensures that a smart contract processes only valid and expected data. When contracts fail to validate incoming inputs, they inadvertently expose themselves to security risks such as logic manipulation, unauthorized access, and unexpected behavior.
+      </p>
 
       {/* Vulnerable Contract Demo */}
-      <div style={{ border: '1px solid red', padding: '1rem', marginTop: '1rem' }}>
-        <h3 style={{ color: 'red' }}>🔴 Vulnerable Contract Demo</h3>
-        <p>This contract allows anyone to set arbitrary balances for any user without validation. You can set the balance for any address, including your own or another user's, even if you are not the contract owner.</p>
-        <div>
-          <h4>Set Balance (Insecure)</h4>
-          <input type="text" placeholder="Target User Address" value={vulnerableTargetUser} onChange={(e) => setVulnerableTargetUser(e.target.value)} style={{ width: '300px' }}/>
-          <input type="number" placeholder="Balance" value={vulnerableBalance} onChange={(e) => setVulnerableBalance(e.target.value)} />
-          <button onClick={handleVulnerableSetBalance}>Set Balance</button>
-          {isPendingVulnerable && <div>Waiting for transaction...</div>}
-          {isConfirmingVulnerable && <div>Confirming transaction...</div>}
-          {isConfirmedVulnerable && <div>Transaction confirmed.</div>}
-          {isErrorVulnerable && <div style={{ color: 'red' }}>Error: {errorVulnerable?.shortMessage || errorVulnerable?.message}</div>}
+      <div className="border-2 border-red-500 rounded-lg p-6 space-y-4">
+        <h3 className="text-2xl font-bold text-red-400">🔴 Vulnerable Contract Demo</h3>
+        <p className="text-gray-300">
+          This contract allows anyone to set arbitrary balances for any user without validation. You can set the balance for any address, including your own or another user's, even if you are not the contract owner.
+        </p>
+        <div className="space-y-4">
+          <h4 className="text-xl font-semibold">Set Balance (Insecure)</h4>
+          <div className="flex flex-col md:flex-row gap-4">
+            <input
+              type="text"
+              placeholder="Target User Address"
+              value={vulnerableTargetUser}
+              onChange={(e) => setVulnerableTargetUser(e.target.value)}
+              className="flex-1 p-3 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500"
+            />
+            <input
+              type="number"
+              placeholder="Balance"
+              value={vulnerableBalance}
+              onChange={(e) => setVulnerableBalance(e.target.value)}
+              className="p-3 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500"
+            />
+            <button
+              onClick={handleVulnerableSetBalance}
+              className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200"
+            >
+              Set Balance
+            </button>
+          </div>
+          {(isPendingVulnerable || isConfirmingVulnerable) && <div className="text-red-300">Waiting for transaction...</div>}
+          {isConfirmedVulnerable && <div className="text-green-400">Transaction confirmed.</div>}
+          {isErrorVulnerable && <div className="text-red-400">Error: {errorVulnerable?.shortMessage || errorVulnerable?.message}</div>}
         </div>
-        <div style={{ marginTop: '1rem' }}>
-          <h4>Check Balance</h4>
-          <input type="text" placeholder="User Address to Check" value={vulnerableCheckUser} onChange={(e) => setVulnerableCheckUser(e.target.value)} style={{ width: '300px' }} />
-          <button onClick={handleVulnerableCheckBalance}>Check Balance</button>
-          {vulnerableCheckedBalance !== null && <div><strong>Balance:</strong> {vulnerableCheckedBalance}</div>}
+        <div className="space-y-4 pt-4 border-t border-gray-600">
+          <h4 className="text-xl font-semibold">Check Balance</h4>
+          <div className="flex flex-col md:flex-row gap-4 items-center">
+            <input
+              type="text"
+              placeholder="User Address to Check"
+              value={vulnerableCheckUser}
+              onChange={(e) => setVulnerableCheckUser(e.target.value)}
+              className="flex-1 p-3 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500"
+            />
+            <button
+              onClick={handleVulnerableCheckBalance}
+              className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200"
+            >
+              Check Balance
+            </button>
+          </div>
+          {vulnerableCheckedBalance !== null && (
+            <div className="p-4 bg-gray-700 rounded-md text-gray-200">
+              <strong>Balance:</strong> {vulnerableCheckedBalance}
+            </div>
+          )}
         </div>
       </div>
 
       {/* Fixed Contract Demo */}
-      <div style={{ border: '1px solid green', padding: '1rem', marginTop: '2rem' }}>
-        <h3 style={{ color: 'green' }}>🟢 Fixed Contract Demo</h3>
-        <p>This contract includes input validation and an `onlyOwner` modifier to restrict who can set balances. Only the contract owner can call `setBalance`, and it validates that the target address is not the zero address.</p>
-        <div>
-          <h4>Set Balance (Secure)</h4>
-          <input type="text" placeholder="Target User Address" value={fixedTargetUser} onChange={(e) => setFixedTargetUser(e.target.value)} style={{ width: '300px' }}/>
-          <input type="number" placeholder="Balance" value={fixedBalance} onChange={(e) => setFixedBalance(e.target.value)} />
-          <button onClick={handleFixedSetBalance}>Set Balance</button>
-          {isPendingFixed && <div>Waiting for transaction...</div>}
-          {isConfirmingFixed && <div>Confirming transaction...</div>}
-          {isConfirmedFixed && <div>Transaction confirmed.</div>}
-          {isErrorFixed && <div style={{ color: 'red' }}>Error: {errorFixed?.shortMessage || errorFixed?.message}</div>}
-          {isErrorFixed && console.log("Fixed Contract Error:", errorFixed)}
+      <div className="border-2 border-green-500 rounded-lg p-6 space-y-4">
+        <h3 className="text-2xl font-bold text-green-400">🟢 Fixed Contract Demo</h3>
+        <p className="text-gray-300">
+          This contract includes input validation and an `onlyOwner` modifier to restrict who can set balances. Only the contract owner can call `setBalance`, and it validates that the target address is not the zero address.
+        </p>
+        <div className="space-y-4">
+          <h4 className="text-xl font-semibold">Set Balance (Secure)</h4>
+          <div className="flex flex-col md:flex-row gap-4">
+            <input
+              type="text"
+              placeholder="Target User Address"
+              value={fixedTargetUser}
+              onChange={(e) => setFixedTargetUser(e.target.value)}
+              className="flex-1 p-3 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500"
+            />
+            <input
+              type="number"
+              placeholder="Balance"
+              value={fixedBalance}
+              onChange={(e) => setFixedBalance(e.target.value)}
+              className="p-3 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500"
+            />
+            <button
+              onClick={handleFixedSetBalance}
+              className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200"
+            >
+              Set Balance
+            </button>
+          </div>
+          {(isPendingFixed || isConfirmingFixed) && <div className="text-green-300">Waiting for transaction...</div>}
+          {isConfirmedFixed && <div className="text-green-400">Transaction confirmed.</div>}
+          {isErrorFixed && <div className="text-red-400">Error: {errorFixed?.shortMessage || errorFixed?.message}</div>}
         </div>
-        <div style={{ marginTop: '1rem' }}>
-          <h4>Check Balance</h4>
-          <input type="text" placeholder="User Address to Check" value={fixedCheckUser} onChange={(e) => setFixedCheckUser(e.target.value)} style={{ width: '300px' }} />
-          <button onClick={handleFixedCheckBalance}>Check Balance</button>
-          {fixedCheckedBalance !== null && <div><strong>Balance:</strong> {fixedCheckedBalance}</div>}
+        <div className="space-y-4 pt-4 border-t border-gray-600">
+          <h4 className="text-xl font-semibold">Check Balance</h4>
+          <div className="flex flex-col md:flex-row gap-4 items-center">
+            <input
+              type="text"
+              placeholder="User Address to Check"
+              value={fixedCheckUser}
+              onChange={(e) => setFixedCheckUser(e.target.value)}
+              className="flex-1 p-3 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500"
+            />
+            <button
+              onClick={handleFixedCheckBalance}
+              className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200"
+            >
+              Check Balance
+            </button>
+          </div>
+          {fixedCheckedBalance !== null && (
+            <div className="p-4 bg-gray-700 rounded-md text-gray-200">
+              <strong>Balance:</strong> {fixedCheckedBalance}
+            </div>
+          )}
         </div>
       </div>
     </section>
