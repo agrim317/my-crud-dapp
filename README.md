@@ -39,8 +39,9 @@ The frontend uses environment variables to store contract addresses. This allows
 2.  **Add Contract Addresses:** After deploying your contracts (see Step 2.3), copy their addresses into the `.env` file. For example:
 
     ```
-    VITE_SECURE_CRUD_ADDRESS='0x5FbDB2315678afecb367f032d93F642f64180aa3'
-    VITE_VULNERABLE_CRUD_ADDRESS='0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512'
+    VITE_SC01_IMPROPER_ACCESS_CONTROL_VULNERABLE_ADDRESS='0x...'
+    VITE_SC04_LACK_OF_INPUT_VALIDATION_VULNERABLE_ADDRESS='0x...'
+    VITE_SC08_INTEGER_OVERFLOW_AND_UNDERFLOW_VULNERABLE_ADDRESS='0x...'
     ```
     **Note:** The `VITE_` prefix is required for Vite to expose these variables to the browser.
 
